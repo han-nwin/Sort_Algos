@@ -1,5 +1,7 @@
+#include <algorithm>
 #include <iostream>
 #include <ostream>
+#include <queue>
 #include <vector>
 
 
@@ -57,6 +59,48 @@ void shellSort (std::vector<int> & arr) {
 
 }
 
+void heapSort (std::vector<int> & arr) {
+
+  std::make_heap(arr.begin(), arr.end());//build a max heap 
+  
+  for (size_t i = 0; i < arr.size(); i++) {
+    std::pop_heap(arr.begin(), arr.end()-i); //move top element to the end and build smaller heap every interation
+  }
+  
+  
+}
+
+void merge() {}
+
+void mergeSort(std::vector<int> & arr) {
+
+  if (arr.size() <= 1) return;
+
+  size_t n = arr.size();
+  if (n % 2 == 0) {
+    n = n / 2;
+  } else {
+      n = n / 2 + 1;
+  }
+
+  std::vector<int> left(arr.begin(), arr.begin() + n);
+  std::vector<int> right(arr.begin() + n, arr.end());
+
+  
+  for (auto & element : left) {
+    std::cout << element << ", ";
+  }
+  std::cout << std::endl;
+
+
+  for (auto & element : right) {
+    std::cout << element << ", ";
+  }
+  std::cout << std::endl;
+
+
+
+}
 
 int main() {
   std::vector<int> arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 6, 33, 59, 71, 20, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
@@ -66,7 +110,7 @@ int main() {
   }
   std::cout << std::endl;
 
-  std::cout << "BubbleSort" << std::endl;
+  std::cout << "\nBubbleSort N^2" << std::endl;
   bubbleSort(arr);
   for (auto & element : arr) {
     std::cout << element << ", ";
@@ -75,7 +119,7 @@ int main() {
   
 
   arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 6, 33, 59, 71, 20, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
-  std::cout << "Insertion Sort" << std::endl;
+  std::cout << "\nInsertion Sort N^2" << std::endl;
   insertionSort(arr);
   for (auto & element : arr) {
     std::cout << element << ", ";
@@ -84,8 +128,26 @@ int main() {
 
 
   arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 6, 33, 59, 71, 20, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
-  std::cout << "Shell Sort" << std::endl;
+  std::cout << "\nShell Sort Nlog^2N" << std::endl;
   shellSort(arr);
+  for (auto & element : arr) {
+    std::cout << element << ", ";
+  }
+  std::cout << std::endl;
+
+
+  arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 6, 33, 59, 71, 20, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
+  std::cout << "\nHeap Sort 24.5NlogN" << std::endl;
+  heapSort(arr);
+  for (auto & element : arr) {
+    std::cout << element << ", ";
+  }
+  std::cout << std::endl;
+
+
+  arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 6, 33, 59, 71, 20, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
+  std::cout << "\nMerger Sort 24.5NlogN" << std::endl;
+  mergeSort(arr);
   for (auto & element : arr) {
     std::cout << element << ", ";
   }
