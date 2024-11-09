@@ -70,35 +70,45 @@ void heapSort (std::vector<int> & arr) {
   
 }
 
-void merge() {}
+std::vector<int> merge(std::vector<int> & left, std::vector<int> & right) {
+  size_t i = 0;
+  size_t j = 0;
+  std::vector<int> newArr;
+  while (i < left.size() && j < right.size()) {
+    if (left[i] <= right[j]) {
+      newArr.push_back(left[i]);
+      i++;
+    } else {
+      newArr.push_back(right[j]);
+      j++;
+    }
+  }
+
+  while (i < left.size()) {
+    newArr.push_back(left[i]);
+    i++;
+  }
+
+  while (j < right.size()) {
+    newArr.push_back(right[j]);
+    j++;
+  }
+  return newArr;
+}
 
 void mergeSort(std::vector<int> & arr) {
 
   if (arr.size() <= 1) return;
 
-  size_t n = arr.size();
-  if (n % 2 == 0) {
-    n = n / 2;
-  } else {
-      n = n / 2 + 1;
-  }
+  size_t n = arr.size()/2;
 
   std::vector<int> left(arr.begin(), arr.begin() + n);
   std::vector<int> right(arr.begin() + n, arr.end());
 
-  
-  for (auto & element : left) {
-    std::cout << element << ", ";
-  }
-  std::cout << std::endl;
+  mergeSort(left);
+  mergeSort(right);
 
-
-  for (auto & element : right) {
-    std::cout << element << ", ";
-  }
-  std::cout << std::endl;
-
-
+  arr = merge(left, right);
 
 }
 
