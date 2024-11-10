@@ -112,6 +112,27 @@ void mergeSort(std::vector<int> & arr) {
 
 }
 
+int medianThree (std::vector<int> & arr, int left, int right) {
+  int mid = (left + right)/2;
+  
+  if (arr[mid] < arr[left]) {
+    std::swap(arr[mid], arr[left]);
+  }
+  if (arr[right] < arr[left]) {
+    std::swap(arr[right], arr[left]);
+  }
+  if (arr[right] < arr[mid]) {
+    std::swap(arr[right], arr[mid]);
+  }
+
+}
+
+void quickSort (std::vector<int> & arr) {
+
+}
+
+
+
 int main() {
   std::vector<int> arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 6, 33, 59, 71, 20, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
   std::cout << "ORIGINAL ARRAY" << std::endl;
@@ -163,6 +184,15 @@ int main() {
   }
   std::cout << std::endl;
 
+
+
+  arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 6, 33, 59, 71, 20, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
+  std::cout << "\nQuick Sort N^2-wc NlogN-ac" << std::endl;
+  quickSort(arr);
+  for (auto & element : arr) {
+    std::cout << element << ", ";
+  }
+  std::cout << std::endl;
 
 
 
