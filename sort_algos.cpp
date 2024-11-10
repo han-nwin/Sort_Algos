@@ -125,10 +125,49 @@ int medianThree (std::vector<int> & arr, int left, int right) {
     std::swap(arr[right], arr[mid]);
   }
 
+  //Place the pivot at the position before the end of the array
+  std::swap(arr[mid], arr[right-1]);
+
+  return arr[right-1];
+
 }
 
-void quickSort (std::vector<int> & arr) {
+// QuickSort function with small subarray handling
+void insertionSort2(std::vector<int>& arr, int left, int right) {
+  for (int i = left + 1; i <= right; ++i) {
+    int temp = arr[i];
+    int j = i - 1;
+    while (j >= left && arr[j] > temp) {
+        arr[j + 1] = arr[j];
+        --j;
+    }
+    arr[j + 1] = temp;
+  }
+}
 
+void quickSort (std::vector<int> & arr, int left, int right) {
+  if ((left+10) <= right) {
+    int pivot = medianThree(arr, left, right);
+    int i = left;
+    int j = right-1;
+
+    while (1) {
+      while (arr[++i] < pivot) {}; //move left cursor
+      while (arr[--j] > pivot) {}; //move right cursor
+
+      if (i < j) {
+        std::swap(arr[i], arr[j]);
+      } else break;
+    }
+
+    std::swap(arr[i], arr[right-1]); // Move the pivot to middle
+                                     //
+    quickSort(arr, left, i-1);//Sort small elements
+    quickSort(arr, i+1, right);//Sort large element
+  } else {
+    insertionSort2(arr, left, right);
+
+  }
 }
 
 
@@ -188,7 +227,7 @@ int main() {
 
   arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 6, 33, 59, 71, 20, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
   std::cout << "\nQuick Sort N^2-wc NlogN-ac" << std::endl;
-  quickSort(arr);
+  quickSort(arr, 0, arr.size()-1);
   for (auto & element : arr) {
     std::cout << element << ", ";
   }
