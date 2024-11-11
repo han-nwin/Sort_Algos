@@ -171,6 +171,17 @@ void quickSort (std::vector<int> & arr, int left, int right) {
 }
 
 
+void bucketSort (std::vector<int> & arr) {
+  std::vector<int> arrB(100,0);
+  for (int & element : arr) {
+    arrB[element] += 1;
+  }
+  std::vector<in> newArr;
+  for (int i = 0; i < arrB.size(); i++) {
+    
+  }
+}
+
 
 int main() {
   std::vector<int> arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 6, 33, 59, 71, 20, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
