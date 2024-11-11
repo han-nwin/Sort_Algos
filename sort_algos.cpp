@@ -185,15 +185,31 @@ void bucketSort (std::vector<int> & arr) {
   arr = newArr;
 }
 
+void radixSort(std::vector<int>& arr, int power, int base) {
+    // Create buckets (queues) for each digit (0 to base - 1)
+    std::vector<std::queue<int>> arrB(base);
 
-void radixSort (std::vector<int> & arr, int power, int base) {
-  std::vector<std::queue<int>> arrB(10,0); //10 elements array for 0-9 digits
-  for (int i = 0; i <= power; i++) {
-    for (size_t j =0; j < arr.size(); j++) {
+    // Iterate over each digit position, from least significant to most significant
+    int divisor = 1;
+    for (int i = 0; i <= power; i++) {
+        // Distribute numbers into the appropriate bucket based on the current digit
+        for (size_t j = 0; j < arr.size(); j++) {
+            int digit = (arr[j] / divisor) % base;
+            arrB[digit].push(arr[j]);
+        }
 
+        // Collect numbers back from the buckets into arr
+        int index = 0;
+        for (int k = 0; k < base; k++) {
+            while (!arrB[k].empty()) {
+                arr[index++] = arrB[k].front();
+                arrB[k].pop();
+            }
+        }
+
+        // Move to the next digit position
+        divisor *= base;
     }
-  }
-
 }
 
 
@@ -267,6 +283,14 @@ int main() {
   }
   std::cout << std::endl;
 
+
+  arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 51, 6, 33, 59, 71, 20, 6, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
+  std::cout << "\nRadix Sort O(p(N+b))" << std::endl;
+  radixSort(arr, 3, 10);
+  for (auto & element : arr) {
+    std::cout << element << ", ";
+  }
+  std::cout << std::endl;
 
   return 0;
 }
