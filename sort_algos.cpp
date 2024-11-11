@@ -172,14 +172,28 @@ void quickSort (std::vector<int> & arr, int left, int right) {
 
 
 void bucketSort (std::vector<int> & arr) {
-  std::vector<int> arrB(100,0);
+  std::vector<int> arrB(200,0);//only sort list of integer < (M = 200)
   for (int & element : arr) {
     arrB[element] += 1;
   }
-  std::vector<in> newArr;
-  for (int i = 0; i < arrB.size(); i++) {
-    
+  std::vector<int> newArr;
+  for (size_t i = 0; i < arrB.size(); i++) {
+    for (int j = 0; j < arrB[i]; j++) {
+      newArr.push_back(i);
+    }
   }
+  arr = newArr;
+}
+
+
+void radixSort (std::vector<int> & arr, int power, int base) {
+  std::vector<std::queue<int>> arrB(10,0); //10 elements array for 0-9 digits
+  for (int i = 0; i <= power; i++) {
+    for (size_t j =0; j < arr.size(); j++) {
+
+    }
+  }
+
 }
 
 
@@ -244,6 +258,14 @@ int main() {
   }
   std::cout << std::endl;
 
+
+  arr = { 42, 17, 3, 88, 56, 23, 94, 12, 51, 78, 51, 6, 33, 59, 71, 20, 6, 15, 65, 87, 29, 9, 100, 46, 27, 11, 5};
+  std::cout << "\nBucket Sort O(M+N)" << std::endl;
+  bucketSort(arr);
+  for (auto & element : arr) {
+    std::cout << element << ", ";
+  }
+  std::cout << std::endl;
 
 
   return 0;
