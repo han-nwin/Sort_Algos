@@ -52,16 +52,27 @@ private:
 };
 
 int main() {
-  DisjointSet ds(5);  // Create 5 disjoint sets
+  DisjointSet ds(17);  // Create 5 disjoint sets
 
   // Union operations
-  ds.unionByRank(0, 1);
   ds.unionByRank(1, 2);
   ds.unionByRank(3, 4);
+  ds.unionByRank(3, 5);
+  ds.unionByRank(1, 7);
+  ds.unionByRank(3, 6);
+  ds.unionByRank(8, 9);
+  ds.unionByRank(1, 8);
+  ds.unionByRank(3, 10);
+  ds.unionByRank(3, 11);
+  ds.unionByRank(3, 12);
+  ds.unionByRank(3, 13);
+  ds.unionByRank(14, 15);
+  ds.unionByRank(16, 0);
+  ds.unionByRank(14, 16);
+  ds.unionByRank(1, 3);
+  ds.unionByRank(1, 14);
 
   // Find operations with path compression
-  std::cout << "Find(2): " << ds.find(2) << std::endl;
-  std::cout << "Find(4): " << ds.find(4) << std::endl;
 
   // Print internal structure for debugging
   ds.print();
